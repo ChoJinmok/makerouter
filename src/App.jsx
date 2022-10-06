@@ -1,3 +1,14 @@
+import Router from './Router';
+import Route from './Route';
+
+import Root from './Root';
+import About from './About';
+
 export default function App() {
-  return (<h1>초기세팅</h1>);
+  return (
+    <Router>
+      <Route path="/" component={<Root />} />
+      <Route path="/about" component={<About />} />
+    </Router>
+  );
 }

@@ -2,6 +2,7 @@ module.exports = {
   env: {
     browser: true,
     es2021: true,
+    jest: true,
   },
   extends: [
     'plugin:react/recommended',
@@ -19,6 +20,15 @@ module.exports = {
   plugins: [
     'react',
   ],
+  globals: {
+    Atomics: 'readonly',
+    SharedArrayBuffer: 'readonly',
+    actor: 'readonly',
+    Feature: 'readonly',
+    Scenario: 'readonly',
+    context: 'readonly',
+    given: 'readonly',
+  },
   rules: {
     indent: ['error', 2],
     'no-trailing-spaces': 'error',
