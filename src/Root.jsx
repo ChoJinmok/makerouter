@@ -1,7 +1,7 @@
 import { useRouter } from './Router';
 
-export default function Root() {
-  const { push } = useRouter();
+export default function Root({ router }) {
+  const { push } = router || useRouter();
 
   function handleClick() {
     push('/about');

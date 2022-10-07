@@ -4,12 +4,13 @@ import {
   useMemo,
   useCallback,
   useState,
+  Children,
 } from 'react';
 
-const RouterContext = createContext();
+export const RouterContext = createContext();
 
-export default function Router({ children }) {
-  const [pathname, setPathname] = useState(window.location.pathname);
+export default function Router({ children, initialEntry }) {
+  const [pathname, setPathname] = initialEntry || useState(window.location.pathname);
 
   const push = useCallback((path) => {
     setPathname(path);
@@ -26,9 +27,17 @@ export default function Router({ children }) {
     pathname, push,
   }), [pathname, push]);
 
+  const RouteIndex = Children.toArray(children)
+    .findIndex((child) => (
+      child.type.name === 'Route'
+       && child.props.path === pathname
+    ));
+
   return (
     <RouterContext.Provider value={value}>
-      {children}
+      {Children.toArray(children).filter((child, index) => (
+        child.type.name === 'Route' ? index === RouteIndex : true
+      ))}
     </RouterContext.Provider>
   );
 }

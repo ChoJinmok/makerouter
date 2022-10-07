@@ -1,7 +1,9 @@
 import { useRouter } from './Router';
 
-export default function Root() {
-  const { push } = useRouter();
+import Link from './Link';
+
+export default function About({ router }) {
+  const { push } = router || useRouter();
 
   function handleClick() {
     push('/');
@@ -10,12 +12,13 @@ export default function Root() {
   return (
     <>
       <h1>about</h1>
-      <button
+      {/* <button
         type="button"
         onClick={handleClick}
       >
         go main
-      </button>
+      </button> */}
+      <Link to="/">go main</Link>
     </>
   );
 }

@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react';
+import { render, fireEvent } from '@testing-library/react';
 
 import Router from './Router';
 
@@ -16,12 +16,16 @@ describe('Root', () => {
   });
 
   it('renders button listen to click event', () => {
+    const push = jest.fn();
+
     const { getByText } = render(
       <Router>
-        <Root />
+        <Root router={{ push }} />
       </Router>,
     );
 
-    getByText('about');
+    fireEvent.click(getByText('about'));
+
+    expect(push).toBeCalledWith('/about');
   });
 });
